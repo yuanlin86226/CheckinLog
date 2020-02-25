@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/signin.css">
+
+        <title>手機差勤後台 - 登入</title>
+    </head>
+    <body class="text-center">
+        <div class="container">
+            <form class="form-signin">
+                <img class="mb-4" src="img/logo_blue.png" style="margin-left: 30px;" height="72">
+                <h1 class="h3 mb-3 font-weight-normal sys-title">手機差勤後台</h1>
+                <label for="inputAccount" class="sr-only">帳號</label>
+                <input type="account" id="inputAccount" class="form-control" placeholder="帳號" required autofocus>
+                <label for="inputPassword" class="sr-only">密碼</label>
+                <input type="password" id="inputPassword" class="form-control" placeholder="密碼" required>
+                <button id="login_btn" class="btn btn-lg btn-login btn-block" type="submit">登入</button>
+                <p class="mt-5 mb-3 text-muted">&copy; 2020 Winhome tech system</p>
+            </form>
+        </div>
+        
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        
+
+        <script>
+            $(document).ready( function () {
+                $("#login_btn").click(function(){
+                    var account = $('#inputAccount').val();
+                    var password = $('#inputPassword').val();
+
+                    var data = {
+                        "account_number": account,
+                        "password": password,
+                    }
+
+                    if (account != "" && password != "") {
+                        $.ajax({
+                            type : "POST",
+                            url  : "https://localhost:5001/api/Auth/Login",
+                            xhrFields: 'withCredentials:true',
+                            data: data,
+                            contentType: "application/json",
+                            dataType: "json",
+                            success: function(response) {
+                                if (response) {
+                                    alert(result);
+                                    console.log(result);
+                                }
+                            },
+                            error: function (error) {
+                                console.log(error)
+                                alert(error);
+                            },
+                            complete: function(result) {
+                                alert(result);
+                                console.log("c");
+                            }
+                        })
+                    }    
+                });
+            } );
+        </script>
+    </body>
+</html>
